@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Golden Temple Mask Outlines -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M54,20 C42,20 34,28 34,42 C34,56 42,66 42,76 C42,82 46,88 54,88 C62,88 66,82 66,76 C66,66 74,56 74,42 C74,28 66,20 54,20 Z" />
+    <path
+        android:fillColor="#FF8C00"
+        android:pathData="M54,28 C45,28 39,34 39,44 C39,52 46,60 46,74 C46,78 49,82 54,82 C59,82 62,78 62,74 C62,60 69,52 69,44 C69,34 63,28 54,28 Z" />
+    <!-- Glowing Ruby Eyes -->
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M46,45 C44,45 43,46 43,48 C43,50 44,51 46,51 C48,51 49,50 49,48 C49,46 48,45 46,45 Z" />
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M62,45 C60,45 59,46 59,48 C59,50 60,51 62,51 C64,51 65,50 65,48 C65,46 64,45 62,45 Z" />
+    <!-- Tribal nose/mouth details -->
+    <path
+        android:fillColor="#B8860B"
+        android:pathData="M52,48 L56,48 L54,60 Z" />
+    <path
+        android:fillColor="#B8860B"
+        android:pathData="M48,66 C48,66 52,70 54,70 C56,70 60,66 60,66 C60,66 56,68 54,68 C52,68 48,66 48,66 Z" />
+</vector>

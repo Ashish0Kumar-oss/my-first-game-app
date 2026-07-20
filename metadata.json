@@ -1,0 +1,6 @@
+{
+  "name": "Temple Escape 3D",
+  "description": "A thrilling 3D endless runner game built in native Kotlin with OpenGL ES 3.0, dynamic lighting, atmospheric fog, and modern Jetpack Compose UI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
