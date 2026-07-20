@@ -340,15 +340,36 @@ class SoundManager {
 
     private fun playBuffer(buffer: ShortArray, sampleRate: Int) {
         try {
-            val audioTrack = AudioTrack(
-                AudioManager.STREAM_MUSIC,
-                sampleRate,
-                AudioFormat.CHANNEL_OUT_MONO,
-                AudioFormat.ENCODING_PCM_16BIT,
-                buffer.size * 2,
-                AudioTrack.MODE_STATIC
-            )
-            audioTrack.write(buffer, 0, buffer.size)
+            val audioTrack = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                AudioTrack.Builder()
+                    .setAudioAttributes(
+                        AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_GAME)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                            .build()
+                    )
+                    .setAudioFormat(
+                        AudioFormat.Builder()
+                            .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+                            .setSampleRate(sampleRate)
+                            .setChannelMask(AudioFormat.CHANNEL_OUT_MONO)
+                            .build()
+                    )
+                    .setBufferSizeInBytes(buffer.size * 2)
+                    .setTransferMode(AudioTrack.MODE_STATIC)
+                    .build()
+            } else {
+                @Suppress("DEPRECATION")
+                AudioTrack(
+                    AudioManager.STREAM_MUSIC,
+                    sampleRate,
+                    AudioFormat.CHANNEL_OUT_MONO,
+                    AudioFormat.ENCODING_PCM_16BIT,
+                    buffer.size * 2,
+                    AudioTrack.MODE_STATIC
+                )
+            }
+            audioTrack.write(buffer, 0, buffer.size, AudioTrack.WRITE_BLOCKING)
             audioTrack.play()
             // Schedule destruction of static track after playback is done to avoid memory leaks
             synthScope.launch {
