@@ -21,11 +21,22 @@ jobs:
         cache: gradle
 
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-      continue-on-error: true # just in case wrapper isn't in main folder
+      run: |
+        if [ -f gradlew ]; then
+          chmod +x gradlew
+        else
+          echo "gradlew not found, skipping chmod"
+        fi
 
-    - name: Decode Debug Keystore
-      run: base64 -d debug.keystore.base64 > debug.keystore
+    - name: Decode or Generate Debug Keystore
+      run: |
+        if [ -f debug.keystore.base64 ]; then
+          echo "Decoding debug.keystore from base64..."
+          base64 -d debug.keystore.base64 > debug.keystore
+        else
+          echo "debug.keystore.base64 not found. Generating a standard debug.keystore..."
+          keytool -genkeypair -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+        fi
 
     - name: Build Debug APK with Gradle
       run: gradle :app:assembleDebug
